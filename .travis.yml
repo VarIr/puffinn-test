@@ -36,7 +36,7 @@ install:
   - python3 setup.py install
 
 script:
-  - pytest
+  - pytest puffinn_test_package
 
 before_cache:
   - brew cleanup || true

@@ -7,7 +7,12 @@ set -e
 # Check for the operating system and install puffinn
 if [[ $(uname) == "Darwin" ]]; then
   echo "Running under Mac OS X and CPU..."
+  echo "xcode-select --install"
+  xcode-select --install || true
+  echo "Install MacOS SDK header for 10.14..."
+  open /Library/Developer/CommandLineTools/Packages/macOS_SDK_headers_for_macOS_10.14.pkg || true
 
+  echo "git clone puffinn, build, install"
   git clone https://github.com/puffinn/puffinn.git
   cd puffinn
   python3 setup.py build
