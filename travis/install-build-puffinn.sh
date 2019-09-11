@@ -15,6 +15,9 @@ if [[ $(uname) == "Darwin" ]]; then
   echo "git clone puffinn, build, install"
   git clone https://github.com/puffinn/puffinn.git
   cd puffinn
+  which gcc
+  unset CC
+  unset CXX
   python3 setup.py build
   pip install .
   cd ..
