@@ -26,6 +26,7 @@ env:
 
 before_install:
   - travis/install-conda.sh
+  - conda install -y llvm llvm-openmp
   - export PATH="$MINICONDA_DIR/bin:$PATH"
   - hash -r
   - travis/install-pip.sh                                   # install all the other requirements
