@@ -1,0 +1,57 @@
+lanuage: python
+
+python:
+  - '3.7'
+
+matrix:
+  include:
+    - os: linux
+      dist: xenial
+      sudo: true
+    - os: osx
+      osx_image: xcode9.3
+      sudo: true
+    - os: osx
+      osx_image: xcode10.3  # default is 9.x, which fails
+      sudo: true
+    - os: osx
+      osx_image: xcode11
+      sudo: true
+
+env:
+  global:
+  - CACHE_DIR="$HOME/virtualenv"
+  - MINICONDA_DIR="$HOME/miniconda"
+  - PYTHONIOENCODING=UTF8
+
+before_install:
+  - travis/install-conda.sh
+  - export PATH="$MINICONDA_DIR/bin:$PATH"
+  - hash -r
+  - travis/install-pip.sh                                   # install all the other requirements
+  - pip install puffinn || travis/install-build-puffinn.sh  # install from cache or build first
+
+install:
+  - python3 setup.py build
+  - python3 setup.py install
+
+script:
+  - pytest
+
+before_cache:
+  - brew cleanup || true
+
+cache:
+  - pip
+  - ccache
+  - packages
+  - directories:
+      - "$HOME/.cache/pip"
+      - "$HOME/virtualenv"
+      - "$HOME/miniconda"
+      - "$HOME/Library/Caches/Homebrew"
+
+branches:
+  only:
+  - master
+  - develop
