@@ -9,12 +9,13 @@ if [[ $(uname) == "Darwin" ]]; then
   echo "Running under Mac OS X and CPU..."
 
   echo "git clone puffinn, build, install"
-  git clone https://github.com/puffinn/puffinn.git
+  git clone https://github.com/VarIr/puffinn.git
   cd puffinn
+  git checkout macos
   which gcc
-  export CC=gcc-9
-  export CXX=g++-9
-  which gcc
+  # export CC=gcc-9
+  # export CXX=g++-9
+  # which gcc
   python3 setup.py build
   pip install .
   cd ..
