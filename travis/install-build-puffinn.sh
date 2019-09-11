@@ -13,9 +13,11 @@ if [[ $(uname) == "Darwin" ]]; then
   cd puffinn
   git checkout macos
   which gcc
-  # export CC=gcc-9
-  # export CXX=g++-9
-  # which gcc
+  gcc --version
+  export CC=gcc-9
+  export CXX=g++-9
+  which gcc
+  gcc --version
   python3 setup.py build
   pip install .
   cd ..

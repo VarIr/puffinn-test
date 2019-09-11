@@ -18,6 +18,12 @@ matrix:
       dist: xenial
       sudo: true
 
+addons:
+  homebrew:
+    packages:
+    - gcc
+    update: false
+
 env:
   global:
   - CACHE_DIR="$HOME/virtualenv"
