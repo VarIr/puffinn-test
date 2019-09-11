@@ -5,9 +5,6 @@ python:
 
 matrix:
   include:
-    - os: linux
-      dist: xenial
-      sudo: true
     - os: osx
       osx_image: xcode9.3
       sudo: true
@@ -17,6 +14,15 @@ matrix:
     - os: osx
       osx_image: xcode11
       sudo: true
+    - os: linux
+      dist: xenial
+      sudo: true
+
+addons:
+  homebrew:
+    packages:
+    - gcc
+    update: false
 
 env:
   global:
@@ -27,10 +33,6 @@ env:
 before_install:
   - travis/install-conda.sh
   - export PATH="$MINICONDA_DIR/bin:$PATH"
-  - conda install -y llvm llvm-openmp || true
-  - conda install -y gcc || true
-  - conda install -y libgcc || true
-  - conda install -y libomp || true
   - hash -r
   - travis/install-pip.sh                                   # install all the other requirements
   - pip install puffinn || travis/install-build-puffinn.sh  # install from cache or build first
