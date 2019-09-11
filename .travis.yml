@@ -26,8 +26,8 @@ env:
 
 before_install:
   - travis/install-conda.sh
-  - conda install -y llvm llvm-openmp
   - export PATH="$MINICONDA_DIR/bin:$PATH"
+  - conda install -y llvm llvm-openmp || true
   - hash -r
   - travis/install-pip.sh                                   # install all the other requirements
   - pip install puffinn || travis/install-build-puffinn.sh  # install from cache or build first
